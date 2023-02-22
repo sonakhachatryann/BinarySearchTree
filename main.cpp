@@ -3,7 +3,7 @@
 
 int main() {
 
-	BST* t = new BST();
+	BST<int>* t = new BST<int>();
 	t->insert_node(10);
 	t->insert_node(8);
 	t->insert_node(16);

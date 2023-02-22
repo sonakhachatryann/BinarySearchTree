@@ -1,31 +1,33 @@
 #include "BinarySearchTree.h"
 
-#include <iostream>
-#include <stack>
-#include <queue>
-
-BST::TreeNode::TreeNode(int value) 
+template <typename T>
+BST<T>::TreeNode::TreeNode(T value) 
 	: m_value(value)
 	, m_left(nullptr)
 	, m_right(nullptr) {}
 
-BST::TreeNode::~TreeNode() {
+template <typename T>
+BST<T>::TreeNode::~TreeNode() {
 	delete m_left;
 	delete m_right;
 }
 
-BST::BST() 
+template <typename T>
+BST<T>::BST() 
 	: m_root(nullptr) {}
 
-BST::~BST() {
+template <typename T>
+BST<T>::~BST() {
 	delete_nodes(m_root);
 }
 
-BST::TreeNode* BST::get_root() const {
+template <typename T>
+typename BST<T>::TreeNode* BST<T>::get_root() const {
 	return m_root;
 }
 
-void BST::insert_node(int value) {
+template <typename T>
+void BST<T>::insert_node(T value) {
 	if (m_root == nullptr) {
 		m_root = new TreeNode(value);
 		return;
@@ -53,7 +55,8 @@ void BST::insert_node(int value) {
 	}
 }
 
-void BST::delete_node(int value) {
+template <typename T>
+void BST<T>::delete_node(T value) {
 	TreeNode* parent = nullptr;
 	TreeNode* current = m_root;
 	while (current != nullptr && current->m_value != value) {
@@ -118,7 +121,8 @@ void BST::delete_node(int value) {
 
 }
 
-BST::TreeNode* BST::find(int value) {
+template <typename T>
+typename BST<T>::TreeNode* BST<T>::find(T value) {
 	TreeNode* tmp = m_root;
 	while (tmp != nullptr) {
 		if (tmp->m_value == value) {
@@ -134,11 +138,13 @@ BST::TreeNode* BST::find(int value) {
 	return nullptr;
 }
 
-int BST::get_value() const {
+template <typename T>
+T BST<T>::get_value() const {
 	return m_root->m_value;
 }
 
-void BST::inorder_iter() {
+template <typename T>
+void BST<T>::inorder_iter() {
 	std::stack<TreeNode*> m_stack;
  	TreeNode* current = m_root;
 	while (current != nullptr || !m_stack.empty()) {
@@ -156,7 +162,8 @@ void BST::inorder_iter() {
 	std::cout << std::endl;
 }
 
-void BST::postorder_iter() {
+template <typename T>
+void BST<T>::postorder_iter() {
 	std::stack<TreeNode*> m_stack;
 	TreeNode* current = m_root;
 	TreeNode* last = nullptr;
@@ -180,7 +187,8 @@ void BST::postorder_iter() {
 	std::cout << std::endl;
 }
 
-void BST::preorder_iter() {
+template <typename T>
+void BST<T>::preorder_iter() {
 	if (m_root == nullptr) {
 		return;
 	}
@@ -208,7 +216,8 @@ void BST::preorder_iter() {
 	std::cout << std::endl;
 }
 
-void BST::levelorder() {
+template <typename T>
+void BST<T>::levelorder() {
 	if (m_root == nullptr) {
 		return;
 	}
@@ -236,7 +245,8 @@ void BST::levelorder() {
 	std::cout << std::endl;
 }
 
-int BST::height() {
+template <typename T>
+int BST<T>::height() {
 	if (m_root == nullptr) {
 		return -1;
 	}
@@ -265,7 +275,8 @@ int BST::height() {
 	}
 }
 
-void BST::delete_nodes(TreeNode* node) {
+template <typename T>
+void BST<T>::delete_nodes(TreeNode* node) {
 	if (node != nullptr) {
 		delete_nodes(node->m_left);
 		delete_nodes(node->m_right);
